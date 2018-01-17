@@ -1,0 +1,41 @@
+{{extend 'layout.html'}}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    {{if result or result2 or result3 or result4:}}
+        {{if result:}}
+			<p class="well">Found <b>{{=total_result}}</b> products for term <strong class="text-danger">{{=request.vars.q}}</strong></p>
+             {{for row_product in result:}}
+              <h2><a href="/app2/product/{{=row_product.slug}}">{{=row_product.name}}</a></h2>
+              <p>{{=row_product.country}}</p>
+            {{pass}}
+        {{pass}}
+        {{if result2:}}
+            <p class="well">Found <b>{{=total_result2}}</b> companies for term <strong class="text-danger">{{=request.vars.q}}</strong></p>
+            {{for row_company in result2:}}
+            <h2><a href="/app2/company/{{=row_company.slug}}">{{=row_company.name}}</a></h2>
+            <p>{{=row_company.country}}</p>
+           {{pass}}
+        {{pass}}
+        {{if result3:}}
+            <p class="well">Found <b>{{=total_result3}}</b> people for term <strong class="text-danger">{{=request.vars.q}}</strong></p>
+            {{for row_person in result3:}}
+     		   <h2><a href="/app2/person/{{=row_person.id}}/{{=row_person.first_name.lower()}}-{{=row_person.last_name.lower()}}">{{=row_person.first_name}}                {{=row_person.last_name}}</a></h2>
+               <p>{{=row_person.email}}</p>
+               <p>{{=row_person.ip_address}}</p>
+            {{pass}}
+        {{if result4:}}
+            <p class="well">Found <b>{{=total_result4}}</b> articles for term <strong class="text-danger">{{=request.vars.q}}</strong></p>
+            {{for row_article in result4:}}
+            <h2><a href="/app2/article/{{=row_article.id}}">{{=row_article.title}}</a></h2>
+            <p>{{=row_article.body}}</p>
+           {{pass}}
+        {{pass}}
+        {{pass}}
+    {{else:}}
+        <h3>No results</h3>
+    {{pass}}
+     <br>
+   </div>
+</div>
+</div>
+<br><br>

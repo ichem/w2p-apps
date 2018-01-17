@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">     
+		<h2>{{=row_product.name }}</h2>
+      	<p>{{=XML(row_product.description, sanitize=False,
+                                          allowed_attributes={'a':['href','title'],
+                                          'img':['src','alt'],'blockquote':['type']},
+                                           permitted_tags=['a','b','blockquote','br/','i',
+                                          'li', 'ol','ul', 'p','cite','code','pre','img/','tt'])}}</p>
+      	<p>{{=row_product.product_type }}</p>
+      	<h4><b>{{=row_product.country }}</b></h4><hr>
+	</div>
+</div>

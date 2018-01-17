@@ -1,0 +1,14 @@
+{{extend 'layout.html'}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Upload file</h2><br>
+            {{=form}}
+        </div>
+    </div>
+</div>
+{{ if url != "": }}
+<script type="text/javascript">
+  window.opener.CKEDITOR.tools.callFunction({{=cknum}}, '{{=url}}');
+</script>
+{{ pass }}

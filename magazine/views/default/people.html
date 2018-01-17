@@ -1,0 +1,61 @@
+{{extend 'layout.html'}}
+<style>
+@media screen and (min-width: 720px) {
+    #filter-button {
+        display: none;
+    }
+}
+@media screen and (min-width: 720px) {
+    #collapseFilter {
+      display: initial;
+    }
+}
+</style>
+<div class="row"> 
+    <div class="col-md-3">
+        <div class="btn-group search-bar">
+            <a id="filter-button" role="button" dara-target="filter-button" data-toggle="collapse" data-parent="search-block" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" style="width:200px">
+             <span class="icon-filter"></span>Filter Search
+        </a>
+          <div class="collapse mega-search" id="collapseFilter">
+              <i><h5>Search by name</h5></i>
+              <form>
+<select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+    <option value="">SELECT NAME</option>
+    <option value="{{=URL('name', args='Jane')}}">JANE</option>
+    <option value="{{=URL('name', args='Frank')}}">FRANK</option>
+    <option value="{{=URL('name', args='Terry')}}">TERRY</option>
+    <option value="{{=URL('name', args='Maria')}}">MARIA</option>
+    <option value="{{=URL('people')}}">ALL</option>
+</select>
+</form><hr>
+        <i><h5>Search by gender</h5></i>
+         <form>
+<select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+    <option value="">SELECT GENDER</option>
+    <option value="{{=URL('gender', args='male')}}">MALE</option>
+    <option value="{{=URL('gender', args='female')}}">FEMALE</option>
+    <option value="{{=URL('people')}}">ALL</option>
+</select>
+        </form><hr>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        {{for row in rows:}} 
+        <h2><a href="{{=URL('person', args=row.id)}}">{{=row.first_name}} {{=row.last_name}}</a></h2> <p>{{=row.email}}</p><b><p>{{=row.gender}}</p></b><p>{{=row.ip_address}}</p><hr> 
+        {{pass}}
+        {{if request.vars == {'page':'1'}:}}
+         <div class="pull-right">
+    <a href="{{=URL(vars={'page':int(request.vars.page)+1})}}">Next</a>
+        </div>
+        {{else:}}
+        <div class="pull-right">
+      <a href="{{=URL(vars={'page':int(request.vars.page)-1})}}">Previous</a> |
+    <a href="{{=URL(vars={'page':int(request.vars.page)+1})}}">Next</a>
+        </div>
+        {{pass}}
+        {{=BR()*3}} 
+    </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+{{extend 'layout.html'}}
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+    <div class="col-md-12">
+        <a href="javascript:void(history.go(-1))" class="btn btn-primary">Back</a><br><br><br>
+        <h2>{{=row.manufacturer}}</h2>
+            <p>{{=XML(row.description)}}</p>
+            <p>{{=row.product_type}}</p>
+            <b><p>{{=row.dual_sim}}</p></b>
+             <p>{{=row.color}}</p>
+            <b><p>{{=row.price}} kn</p></b>
+            <h4>{{=row.country}}</h4><hr>
+        {{pass}}
+    </div>
+    </div>
+    </div>

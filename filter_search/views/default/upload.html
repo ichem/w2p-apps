@@ -1,0 +1,28 @@
+{{extend 'layout.html'}}
+<div class="container">
+{{=form}}
+    <br>
+{{for row in rows:}}
+	<div class="row">
+		<div class='list-group gallery'>
+            <div class='col-sm-12'>
+                <a class="fancybox" rel="ligthbox" href="{{=URL('download', args=row.up_file)}}">
+                   <p>
+                       <img src="{{=URL('download', args=row.up_file)}}" style="width:200px;height:200px;">
+                    </p> 
+                </a>
+            </div>
+        </div>
+    </div>
+{{pass}}
+</div>
+<script>
+    $(document).ready(function(){
+    //FANCYBOX
+    //https://github.com/fancyapps/fancyBox
+    $(".fancybox").fancybox({
+        openEffect: "none",
+        closeEffect: "none"
+    });
+});
+</script>

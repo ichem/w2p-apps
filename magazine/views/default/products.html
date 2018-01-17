@@ -1,0 +1,59 @@
+{{extend 'layout.html'}}
+<style>
+@media screen and (min-width: 720px) {
+    #filter-button {
+        display: none;
+    }
+}
+@media screen and (min-width: 720px) {
+    #collapseFilter {
+      display: initial;
+    }
+}
+</style>
+<div class="row"> 
+    <div class="col-md-3">
+        <div class="btn-group search-bar">
+            <a id="filter-button" role="button" dara-target="filter-button" data-toggle="collapse" data-parent="search-block" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" style="width:200px">
+             <span class="icon-filter"></span>Filter Search
+        </a>
+          <div class="collapse mega-search" id="collapseFilter"> 
+        <i><h5>Search by country</h5></i> 
+       <form>
+<select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+    <option value="">SELECT COUNTRY</option>
+    <option value="{{=URL('country', args='usa')}}">USA</option>
+    <option value="{{=URL('country', args='eu')}}">EU</option>
+    <option value="{{=URL('country', args='jar')}}">JAR</option>
+    <option value="{{=URL('country', args='uk')}}">UK</option>
+    <option value="{{=URL('country', args='cro')}}">CRO</option>
+    <option value="{{=URL('country', args='prc')}}">PRC</option>
+    <option value="{{=URL('products')}}">ALL</option>
+</select>
+</form>
+        <hr>
+        <form>
+        <i><h5>Search by type</h5></i>
+        <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+    <option value="">SELECT TYPE</option>
+   <option value="{{=URL('product_type', args='instruments')}}">INSTRUMENTS</option>
+    <option value="{{=URL('product_type', args='software')}}">SOFTWARE</option>
+    <option value="{{=URL('product_type', args='smartphone')}}">SMARTPHONE</option>
+     <option value="{{=URL('products')}}">ALL</option>
+</select>
+</form>
+    </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        {{for row in rows:}} 
+        <h2><a href="{{=URL('product', args=row.slug)}}">{{=row.name}}</a></h2> 
+        <p>{{=XML(row.description[:200])}}</p> 
+        <p>{{=row.product_type}}</p>
+        <h4><b>{{=row.country}}</b></h4>
+  
+        <hr> 
+        {{pass}}
+    </div>
+    </div>
+</div>

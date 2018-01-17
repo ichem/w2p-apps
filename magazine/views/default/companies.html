@@ -1,0 +1,43 @@
+{{extend 'layout.html'}}
+<style>
+@media screen and (min-width: 768px) {
+    #filter-button {
+        display: none;
+    }
+}
+@media screen and (min-width: 768px) {
+    #collapseFilter {
+      display: block;
+    }
+}
+</style>
+<div class="row"> 
+    <div class="col-md-3">
+        <div class="btn-group search-bar">
+            <a id="filter-button" role="button" dara-target="filter-button" data-toggle="collapse" data-parent="search-block" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+             <span class="icon-filter"></span>Filter Search
+            </a>
+          <div class="collapse mega-search" id="collapseFilter">
+        <i><h5>Search by country</h5></i>
+       <form>
+<select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+    <option value="">SELECT COUNTRY</option>
+    <option value="{{=URL('company_country', args='usa')}}">USA</option>
+    <option value="{{=URL('company_country', args='eu')}}">EU</option>
+    <option value="{{=URL('companies')}}">ALL</option>
+</select>
+</form>
+    </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        {{for row in rows:}} 
+        <h2><a href="{{=URL('company', args=row.slug)}}">{{=row.name}}</a></h2--> 
+        <h4><b>{{=row.country}}</b></h4> 
+        <hr> 
+        {{pass}}
+    </div>
+    </div>
+</div>
+</div>
+</div>

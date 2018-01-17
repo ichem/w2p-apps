@@ -1,0 +1,110 @@
+{{extend 'layout.html'}}
+<div class="row"> 
+    <div class="col-md-offset-2 col-md-8">
+    <div class="col-md-3">
+        <a class="visible-xs" data-toggle="modal" data-target="#myModal">Filter Search</a>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                      <br>
+                      <form>
+                            <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+                                <option value="">Select order</option>
+                                <option value="{{=URL('select', args='lowest-price')}}">Lowest price</option>
+                                <option value="{{=URL('select', args='highest-price')}}">Highest price</option>
+                                <option value="{{=URL('select', args='ascending')}}">Brand: A-Z</option>
+                                <option value="{{=URL('select', args='descending')}}">Brand: Z-A</option>
+                            </select>
+                          </form>
+                      <hr>
+                  <h5>Company</h5>
+                   <form action="{{=URL('filter', vars=dict())}}">   
+                        <input type="checkbox" value="Nokia" name="manufacturer">Nokia<br>
+                        <input type="checkbox" value="Alcatel" name="manufacturer">Alcatel<br>
+                       <input type="checkbox" value="Samsung" name="manufacturer">Samsung<br>
+                       <input type="checkbox" value="HTC" name="manufacturer">HTC<br>
+                       <input type="checkbox" value="Prestigio" name="manufacturer">Prestigio<br>
+                       <input type="checkbox" value="Meanit" name="manufacturer">Meanit<br>
+                       <input type="checkbox" value="Lenovo" name="manufacturer">Lenovo<hr>
+                      <h5>Dual sim</h5>  
+                        <input type="checkbox" value="Yes" name="dual_sim">Yes<br>
+                        <input type="checkbox" value="No" name="dual_sim">No<hr>
+                       <h5>Phone type</h5>   
+                        <input type="checkbox" value="Mobilephone" name="product_type">Mobile phone<br>
+                        <input type="checkbox" value="Smartphone" name="product_type">Smartphone<hr>
+                      <h5>Color</h5>  
+                        <input type="checkbox" value="Black" name="color">Black<br>
+                        <input type="checkbox" value="White" name="color">White<br>
+                       <input type="checkbox" value="Gray" name="color">Gray<hr>
+                       <h5>Country</h5>  
+                        <input type="checkbox" value="USA" name="country">USA<br>
+                        <input type="checkbox" value="UK" name="country">UK<br>
+                       <input type="checkbox" value="EU" name="country">EU<br>
+                        <input type="checkbox" value="JAR" name="country">JAR<br>
+                       <input type="checkbox" value="JAPAN" name="country">JAPAN<br>
+                       <input type="checkbox" value="PRC" name="country">PRC<br>
+                        <input type="submit" value="Filter Search"><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="hidden-xs">
+        <h5>Company</h5>
+       <form action="{{=URL('filter', vars=dict())}}">   
+            <input type="checkbox" value="Nokia" name="manufacturer">Nokia<br>
+            <input type="checkbox" value="Alcatel" name="manufacturer">Alcatel<br>
+           <input type="checkbox" value="Samsung" name="manufacturer">Samsung<br>
+           <input type="checkbox" value="HTC" name="manufacturer">HTC<br>
+           <input type="checkbox" value="Prestigio" name="manufacturer">Prestigio<br>
+           <input type="checkbox" value="Meanit" name="manufacturer">Meanit<br>
+           <input type="checkbox" value="Lenovo" name="manufacturer">Lenovo<hr>
+          <h5>Dual sim</h5>  
+            <input type="checkbox" value="Yes" name="dual_sim">Yes<br>
+            <input type="checkbox" value="No" name="dual_sim">No<hr>
+           <h5>Phone type</h5>   
+            <input type="checkbox" value="Mobilephone" name="product_type">Mobile phone<br>
+            <input type="checkbox" value="Smartphone" name="product_type">Smartphone<hr>
+          <h5>Color</h5>  
+            <input type="checkbox" value="Black" name="color">Black<br>
+            <input type="checkbox" value="White" name="color">White<br>
+           <input type="checkbox" value="Gray" name="color">Gray<hr>
+           <h5>Country</h5>  
+            <input type="checkbox" value="USA" name="country">USA<br>
+            <input type="checkbox" value="UK" name="country">UK<br>
+           <input type="checkbox" value="EU" name="country">EU<br>
+            <input type="checkbox" value="JAR" name="country">JAR<br>
+           <input type="checkbox" value="JAPAN" name="country">JAPAN<br>
+           <input type="checkbox" value="PRC" name="country">PRC<br>
+            <input type="submit" value="Filter Search"><br><br>
+        </form>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="container-fluid">
+        <div class="pull-right">
+            <h4><b>{{=total}}</b> results</h4>
+        </div>
+        <div class="pull-left hidden-xs">
+        <form>
+            <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+                <option value="">Select order</option>
+                <option value="{{=URL('select', args='lowest-price')}}">Lowest price</option>
+                <option value="{{=URL('select', args='highest-price')}}">Highest price</option>
+                <option value="{{=URL('select', args='ascending')}}">Brand: A-Z</option>
+                <option value="{{=URL('select', args='descending')}}">Brand: Z-A</option>
+            </select>
+        </form>
+        </div>
+            </div><hr>
+        {{for row in row:}} 
+        <h2><a href="{{=URL('product', args=row.slug)}}">{{=row.manufacturer}}</a></h2> 
+            <p>{{=XML(row.description)[:200]}}...</p>
+            <p>{{=row.product_type}}</p>
+            <b><p>{{=row.dual_sim}}</p></b>
+             <p>{{=row.color}}</p>
+            <b><p>{{=row.price}} kn</p></b>
+            <h4>{{=row.country}}</h4><hr> 
+        {{pass}}
+    </div>
+    </div>
+</div>

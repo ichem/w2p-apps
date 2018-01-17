@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+<div class="row">
+    <div class="col-md-offset-2 col-sm-8">
+        {{for row in rows:}} 
+        <h2><a href="{{=URL('article', args=row.id)}}">{{=row.title}}</a></h2> 
+        <p>{{=row.body}}</p>
+        <hr> 
+        {{pass}}
+        {{if request.vars == {'page':'1'}:}}
+         <div class="pull-right">
+    <a href="{{=URL(vars={'page':int(request.vars.page)+1})}}">Next</a>
+        </div>
+        {{else:}}
+        <div class="pull-right">
+      <a href="{{=URL(vars={'page':int(request.vars.page)-1})}}">Previous</a> |
+    <a href="{{=URL(vars={'page':int(request.vars.page)+1})}}">Next</a>
+        </div>
+        {{pass}}
+        {{=BR()*3}}    
+    </div>
+    </div>
+</div>

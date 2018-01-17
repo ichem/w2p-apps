@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sleepy Seam</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{=URL('static','assets/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{=URL('static','assets/css/sleepy_seam.css')}}" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{{=URL('static','assets/img/DSC_0443.ico')}}" type="image/x-icon">
+
+    <!-- Custom Fonts -->
+    <link href="{{=URL('static','assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
+    {{block head}}{{end}}
+    {{
+    # using sidebars need to know what sidebar you want to use
+    mc0 = 'col-md-12'
+    mc1 = 'col-md-9'
+    mc2 = 'col-md-6'
+    left_sidebar_enabled = globals().get('left_sidebar_enabled', False)
+    right_sidebar_enabled = globals().get('right_sidebar_enabled', False)
+    middle_column = {0: mc0, 1: mc1, 2: mc2}[
+    (left_sidebar_enabled and 1 or 0)+(right_sidebar_enabled and 1 or 0)]
+    }}
+</head>
+
+<body>
+
+    <!-- From Blog -->
+   <section id="blog" class="blog">
+   <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2>All Posts</h2>
+                    <hr class="small">
+                     {{for row in rows:}}
+            <div class="blog-thumb">
+                   <h1><a href="{{=URL('post', args=row.slug)}}">{{=row.title}}</a></h1>
+                     <div class="post-format">
+                         <span>By <a href="/">{{=row.author.first_name}} {{=row.author.last_name}} </a></span>
+                         <span><i class="fa fa-clock-o"></i> {{=row.created_at}}</span>
+                      </div>
+                     <p>{{=XML(row.subtitle)}}</p>
+                         </div>
+            {{pass}}
+            {{if request.vars == {'page':'1'}:}}
+             <div class="pull-right">
+                <a href="{{=URL(vars={'page':int(request.vars.page)+1})}}" class="btn btn-default">Next</a>
+             </div>
+            {{else:}}
+            <div class="pull-right">
+                 <a href="{{=URL(vars={'page':int(request.vars.page)-1})}}" class="btn btn-default">Previous</a> 
+                <a href="{{=URL(vars={'page':int(request.vars.page)+1})}}" class="btn btn-default">Next</a>
+            </div>
+            {{pass}}
+            {{=BR()*3}}  
+        </div>
+        </div>
+        </div>
+        </section>
+
+    <!-- Footer -->
+    <section id="contact" class="map">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>Sleepy Seam</strong>
+                    </h4>
+                    <p class="text-center">Medulinska 7
+                        <br>Osijek, Croatia</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> +385 91-566-0248</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">malecarolije1@gmail.com</a>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="https://www.facebook.com/sleepyseam"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/sleepy_seam/"><i class="fa fa-instagram fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.etsy.com/shop/SleepySeam"><i class="fa fa-etsy fa-fw fa-3x"></i></a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                    <p class="text-center">Copyright &copy; Sleepy Seam {{=request.now.year}}</p>
+                </div>
+            </div>
+        </div>
+        <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+    </footer>
+    </section>
+    <!-- jQuery -->
+    <script src="{{=URL('static','assets/js/jquery.js')}}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{=URL('static','assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{=URL('static','assets/js/sleepy_seam.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+    {{if response.google_analytics_id:}}
+    <!-- Analytics ==================================== -->
+    <script src="{{=URL('static','js/analytics.min.js')}}"></script>
+    <script type="text/javascript">
+      analytics.initialize({
+      'Google Analytics':{trackingId:'{{=response.google_analytics_id}}'}
+      });
+    </script>
+    {{pass}}
+</body>
+</html>

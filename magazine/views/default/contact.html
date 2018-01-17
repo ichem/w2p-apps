@@ -1,0 +1,32 @@
+{{extend 'layout.html'}}
+<style>
+.btn {
+  background:#2ecc71;
+  padding-top:5px;
+  padding-bottom:5px;
+  color:white;
+  border-radius:2px;
+  border: #27ae60 1px solid;
+  margin-top:20px;
+  margin-bottom:20px;
+  float:left;
+  margin-left:2px;
+  font-weight:800;
+  font-size:0.8em;
+}
+.btn:hover {
+  background:#2CC06B; 
+}
+</style>
+<br>
+<h2 class="container center">Contact</h2>
+<p class="container center">To send us a message fill out the below form.</p>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div id="web2py_user_form" class="col-lg-6 col-lg-offset-3">
+        {{=form}}
+        </div>
+    </div>
+</div>
+<br>
